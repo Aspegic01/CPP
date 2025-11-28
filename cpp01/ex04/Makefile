@@ -5,14 +5,14 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mlabrirh <mlabrirh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/11/26 11:12:30 by mlabrirh          #+#    #+#              #
-#    Updated: 2025/11/27 20:02:15 by mlabrirh         ###   ########.fr        #
+#    Created: 2025/11/27 20:02:04 by mlabrirh          #+#    #+#              #
+#    Updated: 2025/11/27 20:02:32 by mlabrirh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = brain
+NAME = replacer
 
-SRCS = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
+SRCS = main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
