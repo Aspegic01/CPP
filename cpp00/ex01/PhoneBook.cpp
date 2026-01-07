@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlabrirh <mlabrirh@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mlabrirh <mlabrirh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 10:31:58 by mlabrirh          #+#    #+#             */
-/*   Updated: 2025/09/06 10:32:00 by mlabrirh         ###   ########.fr       */
+/*   Updated: 2025/09/25 14:04:11 by mlabrirh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 #include <iostream>
 #include <iomanip>
 
-PhoneBook::PhoneBook() : currentIndex(0), totalContacts(0)
-{
+PhoneBook::PhoneBook(){
+    currentIndex = 0;
+    totalContacts = 0;
 }
 
-PhoneBook::~PhoneBook()
-{
-}
+PhoneBook::~PhoneBook(){}
 
-void PhoneBook::addContact(const Contact& contact)
+void PhoneBook::addContact(const Contact &contact)
 {
     contacts[currentIndex] = contact;
     currentIndex = (currentIndex + 1) % 8;
@@ -30,14 +29,14 @@ void PhoneBook::addContact(const Contact& contact)
         totalContacts++;
 }
 
-std::string PhoneBook::truncateString(const std::string& str, size_t width) const
+std::string PhoneBook::truncateString(const std::string &str, size_t width)
 {
     if (str.length() > width)
         return str.substr(0, width - 1) + ".";
     return str;
 }
 
-void PhoneBook::displayContacts() const
+void PhoneBook::displayContacts()
 {
     std::cout << std::setw(10) << "Index" << "|";
     std::cout << std::setw(10) << "First Name" << "|";
@@ -53,7 +52,7 @@ void PhoneBook::displayContacts() const
     }
 }
 
-void PhoneBook::displayContactDetails(int index) const
+void PhoneBook::displayContactDetails(int index)
 {
     if (index < 0 || index >= totalContacts)
     {
@@ -68,7 +67,7 @@ void PhoneBook::displayContactDetails(int index) const
     std::cout << "Darkest Secret: " << contacts[index].getDarkestSecret() << std::endl;
 }
 
-int PhoneBook::getTotalContacts() const
+int PhoneBook::getTotalContacts()
 {
     return totalContacts;
 }

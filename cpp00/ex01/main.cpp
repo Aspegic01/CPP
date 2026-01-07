@@ -3,24 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlabrirh <mlabrirh@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mlabrirh <mlabrirh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 10:31:46 by mlabrirh          #+#    #+#             */
-/*   Updated: 2025/09/06 10:59:10 by mlabrirh         ###   ########.fr       */
+/*   Updated: 2025/09/25 10:12:29 by mlabrirh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
+#include <cctype>
 #include <iostream>
 #include <string>
 
-std::string getInput(const std::string& prompt)
+std::string getInput(const std::string &prompt)
 {
     std::string input;
     std::cout << prompt;
     std::getline(std::cin, input);
     return input;
+}
+
+bool isNumber(const std::string s)
+{
+    if (s.empty())
+        return false;
+
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (!std::isdigit((unsigned char)s[i]))
+            return false;
+    }
+    return true;
 }
 
 Contact createContact()
@@ -32,11 +46,15 @@ Contact createContact()
         input = getInput("Enter first name: ");
         if (!input.empty())
             break;
+        if (std::cin.eof())
+            break;
     }
     contact.setFirstName(input);
     while (true) {
         input = getInput("Enter last name: ");
         if (!input.empty())
+            break;
+        if (std::cin.eof())
             break;
     }
     contact.setLastName(input);
@@ -44,11 +62,18 @@ Contact createContact()
         input = getInput("Enter nickname: ");
         if (!input.empty())
             break;
+        if (std::cin.eof())
+            break;
     }
     contact.setNickname(input);
     while (true) {
         input = getInput("Enter phone number: ");
-        if (!input.empty())
+        if (isNumber(input))
+        {
+            break;
+        }
+            std::cout << "Error: only numeric input is accepted." << std::endl;
+        if (std::cin.eof())
             break;
     }
     contact.setPhoneNumber(input);
@@ -56,13 +81,15 @@ Contact createContact()
         input = getInput("Enter darkest secret: ");
         if (!input.empty())
             break;
+        if (std::cin.eof())
+            break;
     }
     contact.setDarkestSecret(input);
 
     return contact;
 }
 
-void searchContacts(PhoneBook& phoneBook)
+void searchContacts(PhoneBook &phoneBook)
 {
     if (phoneBook.getTotalContacts() == 0)
     {
@@ -91,7 +118,6 @@ void searchContacts(PhoneBook& phoneBook)
         else
             index = index * 10 + (input[i] - '0');
     }
-    
     if (isValid)
         phoneBook.displayContactDetails(index);
     else
@@ -107,9 +133,14 @@ int main()
     
     while (true)
     {
+        if (std::cin.eof())
+        {
+            std::cout << "Goodbye!" << "\n";
+            break;
+        }
         std::cout << "Enter a command (ADD, SEARCH, EXIT): ";
         std::getline(std::cin, command);
-        
+
         if (command == "ADD")
         {
             Contact newContact = createContact();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlabrirh <mlabrirh@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mlabrirh <mlabrirh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 10:31:53 by mlabrirh          #+#    #+#             */
-/*   Updated: 2025/09/06 10:31:55 by mlabrirh         ###   ########.fr       */
+/*   Updated: 2025/09/25 10:28:39 by mlabrirh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,15 @@ private:
     int currentIndex;
     int totalContacts;
     
-    std::string truncateString(const std::string& str, size_t width) const;
-
 public:
-    PhoneBook();
-    ~PhoneBook();
     
-    void addContact(const Contact& contact);
-    void displayContacts() const;
-    void displayContactDetails(int index) const;
-    int getTotalContacts() const;
+    PhoneBook ();
+    ~PhoneBook();
+    std::string truncateString(const std::string &str, size_t width);
+    void addContact(const Contact &contact);
+    void displayContacts();
+    void displayContactDetails(int index);
+    int getTotalContacts();
 };
 
 #endif

@@ -11,12 +11,13 @@
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
-#include <iostream>
 
 
 int main()
 {
 	Zombie* z = newZombie("3sila");
+	if (!z)
+		return std::cout << "Failed to create Zombie" << std::endl, 1;
 	z->announce();
 	delete z;
 	randomChump("Kho 3ssila");

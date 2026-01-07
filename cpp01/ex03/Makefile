@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = brain
+NAME = human
 
 SRCS = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
 
@@ -36,3 +36,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+.SECONDARY:

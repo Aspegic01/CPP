@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = zombiehorde
+NAME = zombie
 
 SRCS = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
 
@@ -36,3 +36,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+.SECONDARY:

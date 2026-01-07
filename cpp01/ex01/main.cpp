@@ -14,8 +14,10 @@
 
 int main()
 {
-    int N = 5;
+    int N = 6;
     Zombie* horde = zombieHorde(N, "ZombieHorde");
+    if(!horde)
+        return std::cout << "Failed to create Zombie horde" << std::endl, 1;
     for (int i = 0; i < N; i++)
         horde[i].announce();
     delete[] horde;

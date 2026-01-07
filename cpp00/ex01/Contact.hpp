@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlabrirh <mlabrirh@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mlabrirh <mlabrirh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 10:32:08 by mlabrirh          #+#    #+#             */
-/*   Updated: 2025/09/06 10:32:10 by mlabrirh         ###   ########.fr       */
+/*   Updated: 2025/09/25 14:22:50 by mlabrirh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,20 @@ private:
     std::string darkestSecret;
 
 public:
-    Contact();
-    ~Contact();
+
+    void setFirstName(const std::string &firstName);
+    void setLastName(const std::string &lastName);
+    void setNickname(const std::string &nickname);
+    void setPhoneNumber(const std::string &phoneNumber);
+    void setDarkestSecret(const std::string &darkestSecret);
     
-    // Setters
-    void setFirstName(const std::string& firstName);
-    void setLastName(const std::string& lastName);
-    void setNickname(const std::string& nickname);
-    void setPhoneNumber(const std::string& phoneNumber);
-    void setDarkestSecret(const std::string& darkestSecret);
+    std::string getFirstName();
+    std::string getLastName();
+    std::string getNickname();
+    std::string getPhoneNumber();
+    std::string getDarkestSecret();
     
-    // Getters
-    std::string getFirstName() const;
-    std::string getLastName() const;
-    std::string getNickname() const;
-    std::string getPhoneNumber() const;
-    std::string getDarkestSecret() const;
-    
-    // Utility
-    bool isEmpty() const;
+    bool isEmpty();
 };
 
 #endif

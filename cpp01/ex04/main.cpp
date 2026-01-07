@@ -16,20 +16,21 @@
 
 int openfiles(const std::string& inputfile, const std::string& outputfile, std::ifstream& infile, std::ofstream& outfile)
 {
-    infile.open(inputfile.c_str());
+    infile.open(inputfile.c_str()); 
     if (!infile.is_open())
     {
         std::cerr << "Error: Could not open input file " << inputfile << std::endl;
-        return 1;
+        return 0;
     }
+
     outfile.open(outputfile.c_str());
     if (!outfile.is_open())
     {
         std::cerr << "Error: Could not open output file " << outputfile << std::endl;
         infile.close();
-        return 1;
+        return 0;
     }
-    return 0;
+    return 1;
 }
 
 void read_and_replace(char * av[], std::ifstream& infile, std::ofstream& outfile)
@@ -39,6 +40,8 @@ void read_and_replace(char * av[], std::ifstream& infile, std::ofstream& outfile
     to_find = av[2];
     to_replace = av[3];
     std::string line;
+
+    (void)outfile;
     while (std::getline(infile, line))
     {
         size_t pos = 0;
@@ -54,19 +57,29 @@ void read_and_replace(char * av[], std::ifstream& infile, std::ofstream& outfile
 
 int main(int ac, char **av)
 {
+    (void)ac;
+    if(ac != 4)
+    {
+        std::cout << "Usage: " << av[0] << " <inputfile> <to_find> <to_replace>" << std::endl;
+        return 1;
+    }
+    if(std::string(av[2]).empty())
+    {
+        std::cerr << "Error: String to find cannot be empty." << std::endl;
+        return 1;
+    }
     std::string inputfile;
     std::string outputfile;
     std::ifstream infile;
     std::ofstream outfile;
-    (void)ac;
-    if(ac != 4)
+    inputfile = av[1];
+    outputfile = inputfile + ".replace";
+    if (inputfile.empty() || outputfile.empty())
     {
-        std::cout << "Usage: " << av[0] << " <inputfile> <outputfile>" << std::endl;
+        std::cerr << "Error: Input or output file name is empty." << std::endl;
         return 1;
     }
-    inputfile = av[1];
-    outputfile = outputfile + av[1] + ".replace";
-    if (openfiles(inputfile, outputfile, infile, outfile))
+    if (!openfiles(inputfile, outputfile, infile, outfile))
         return 1;
     read_and_replace(av, infile, outfile);
     infile.close();
