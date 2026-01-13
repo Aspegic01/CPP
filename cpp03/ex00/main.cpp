@@ -14,14 +14,15 @@
 
 int main(){
 	ClapTrap a("3silla");
-	a.takeDamage(12);
-	a.takeDamage(1);
-	a.beRepaired(8);
-	a.takeDamage(7);
-	a.beRepaired(9);
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 5; i++)
 	{
-		a.beRepaired(1);
+		a.attack("enemy");
 	}
-	a.attack("enamy");
+	a.takeDamage(6);
+	a.beRepaired(1);
+	a.beRepaired(1);
+	a.beRepaired(1);
+	a.attack("enemy");
+	a.attack("enemy");
+	a.attack("enemy");
 }

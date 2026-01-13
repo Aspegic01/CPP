@@ -13,32 +13,20 @@
 #include "FragTrap.h"
 #include "ClapTrap.h"
 
-FragTrap::FragTrap(): ClapTrap()
+FragTrap::FragTrap(): ClapTrap("Default", 100, 100, 30)
 {
-    this->hitPoints = 100;
-    this->energyPoints = 100;
-    this->attackDamage = 30;
     std::cout << "FragTrap Default constructor called" << std::endl;
 }
 
 
-FragTrap::FragTrap(std::string &name)
+FragTrap::FragTrap(std::string name) : ClapTrap(name, 100, 100, 30)
 {
-    this->name = name;
-    this->hitPoints = 100;
-    this->energyPoints = 50;
-    this->attackDamage = 20;
     std::cout << "FragTrap Parameterized constructor called" << std::endl;
 }
 
 FragTrap::FragTrap(FragTrap const & other): ClapTrap(other)
 {
     std::cout << "FragTrap Copy constructor called" << std::endl;
-}
-
-FragTrap::~FragTrap()
-{
-    std::cout << "FragTrap Destructor called" << std::endl;
 }
 
 FragTrap & FragTrap::operator=(FragTrap const & other)
@@ -52,6 +40,11 @@ FragTrap & FragTrap::operator=(FragTrap const & other)
     }
     std::cout << "FragTrap Assignment operator called" << std::endl;
     return *this;
+}
+
+FragTrap::~FragTrap()
+{
+    std::cout << "FragTrap Destructor called" << std::endl;
 }
 
 void FragTrap::highFivesGuys(){

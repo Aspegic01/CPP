@@ -12,11 +12,17 @@
 
 #include "ClapTrap.h"
 
-ClapTrap::ClapTrap() : name("Default"), hitPoints(10), energyPoints(10), attackDamage(0)
+ClapTrap::ClapTrap(std::string  name, unsigned int hp, unsigned int energy, unsigned int damage)
+: name(name), hitPoints(hp), energyPoints(energy), attackDamage(damage)
+{
+    std::cout << "ClapTrap parameterized constructor called" << std::endl;
+}
+
+ClapTrap::ClapTrap() : name("Default"), hitPoints(100), energyPoints(100), attackDamage(30)
 {
     std::cout << "ClapTrap default constructor called" << std::endl;
 }
-ClapTrap::ClapTrap(std::string const & name) : name(name), hitPoints(10), energyPoints(10), attackDamage(0)
+ClapTrap::ClapTrap(std::string const & name) : name(name), hitPoints(100), energyPoints(100), attackDamage(30)
 {
 	std::cout << "ClapTrap parameterized constructor called" << std::endl;
 }
@@ -71,7 +77,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 }
 void ClapTrap::beRepaired(unsigned int amount)
 {
-    if (this->energyPoints == 0 || this->hitPoints == 0)
+    if (this->energyPoints == 0)
     {
         std::cout << "ClapTrap has no energy or hit points left to repaired" << std::endl; 
         return;

@@ -3,25 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlabrirh <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mlabrirh <mlabrirh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 17:10:57 by mlabrirh          #+#    #+#             */
-/*   Updated: 2026/01/06 17:11:13 by mlabrirh         ###   ########.fr       */
+/*   Updated: 2026/01/13 20:00:54 by mlabrirh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.h"
+#include "ScavTrap.h"
 
 int main(){
-	ClapTrap a("3silla");
-	a.takeDamage(12);
-	a.takeDamage(1);
-	a.beRepaired(8);
-	a.takeDamage(7);
-	a.beRepaired(9);
-	for (int i = 0; i < 10; i++)
+	ScavTrap b("kho 3sila");
+	for (int i = 0; i < 5; i++)
 	{
-		a.beRepaired(1);
+		b.attack("enemy");
 	}
-	a.attack("enamy");
+	b.guardGate();
+	b.takeDamage(6);
+	b.beRepaired(1);
 }

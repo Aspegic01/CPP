@@ -12,31 +12,18 @@
 
 #include "ScavTrap.h"
 
-ScavTrap::ScavTrap(): ClapTrap()
-{
-    this->hitPoints = 100;
-    this->energyPoints = 50;
-    this->attackDamage = 20;
-    std::cout << "ScavTrap Default constructor called" << std::endl;
+ScavTrap::ScavTrap(): ClapTrap("Default", 100, 50, 20){
+	std::cout << "ScavTrap constructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string &name)
+ScavTrap::ScavTrap(std::string name): ClapTrap(name, 100, 50, 20)
 {
-    this->name = name;
-    this->hitPoints = 100;
-    this->energyPoints = 50;
-    this->attackDamage = 20;
     std::cout << "ScavTrap Parameterized constructor called" << std::endl;
 }
 
 ScavTrap::ScavTrap(ScavTrap const & other): ClapTrap(other)
 {
     std::cout << "ScavTrap Copy constructor called" << std::endl;
-}
-
-ScavTrap::~ScavTrap()
-{
-    std::cout << "ScavTrap Destructor called" << std::endl;
 }
 
 ScavTrap & ScavTrap::operator=(ScavTrap const & other)
@@ -52,10 +39,15 @@ ScavTrap & ScavTrap::operator=(ScavTrap const & other)
     return *this;
 }
 
+ScavTrap::~ScavTrap()
+{
+    std::cout << "ScavTrap Destructor called" << std::endl;
+}
+
 void    ScavTrap::attack(const std::string &target)
 {
 
-    if (this->energyPoints > 0 && this->hitPoints > 0)
+    if (this->energyPoints > 0)
     {
         this->energyPoints--;
         std::cout << "ScavTrap " << this->name << " attacks " << target << ", causing " << this->attackDamage << " points of damage!" << std::endl;
