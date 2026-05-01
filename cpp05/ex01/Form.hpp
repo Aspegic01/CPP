@@ -13,7 +13,8 @@
 #ifndef FORM_HPP
 #define FORM_HPP
 #include <iostream>
-#include "Bureaucrat.hpp"
+
+class Bureaucrat;
 
 class Form
 {
@@ -28,7 +29,7 @@ class Form
         Form(const Form &other);
         ~Form();
         Form &operator=(const Form &other);
-        std::string getName() const;
+        const std::string& getName() const;
         bool getIsSigned() const;
         int getGradeToSign() const;
         int getGradeToExecute() const;

@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
+
 Form::Form() : name("Default Form"), isSigned(false), gradeToSign(150), gradeToExecute(150){}
 
 Form::Form(const std::string name, const int gradeToSign, const int gradeToExecute) : name(name), isSigned(false), gradeToSign(gradeToSign), gradeToExecute(gradeToExecute)
@@ -32,7 +34,7 @@ Form &Form::operator=(const Form &other)
     return *this;
 }
 
-std::string Form::getName() const
+const std::string& Form::getName() const
 {
     return this->name;
 }
