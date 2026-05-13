@@ -5,10 +5,6 @@ Intern::Intern(const Intern &other) { (void)other; }
 Intern::~Intern() {}
 Intern &Intern::operator=(const Intern &other) { (void)other; return *this; }
 
-static AForm* createShrubbery(std::string target) { return new ShrubberyCreationForm(target); }
-static AForm* createRobotomy(std::string target) { return new RobotomyRequestForm(target); }
-static AForm* createPardon(std::string target) { return new PresidentialPardonForm(target); }
-
 AForm* Intern::makeForm(std::string name, std::string target) {
     std::string formNames[] = {
         "shrubbery creation",
@@ -16,19 +12,26 @@ AForm* Intern::makeForm(std::string name, std::string target) {
         "presidential pardon"
     };
 
-    AForm* (*functions[])(std::string) = {
-        &createShrubbery,
-        &createRobotomy,
-        &createPardon
-    };
-
-    for (int i = 0; i < 3; i++) {
-        if (formNames[i] == name) {
-            std::cout << "Intern creates " << name << std::endl;
-            return functions[i](target);
-        }
+    int i = 0;
+    
+    // Increment 'i' until we find a match or reach the end of the array
+    while (i < 3 && formNames[i] != name) {
+        i++;
     }
 
-    std::cout << "Error: Intern cannot create form '" << name << "' (Unknown type)" << std::endl;
-    return NULL;
+    // Switch on the resulting integer index
+    switch (i) {
+        case 0:
+            std::cout << "Intern creates " << name << std::endl;
+            return new ShrubberyCreationForm(target);
+        case 1:
+            std::cout << "Intern creates " << name << std::endl;
+            return new RobotomyRequestForm(target);
+        case 2:
+            std::cout << "Intern creates " << name << std::endl;
+            return new PresidentialPardonForm(target);
+        default:
+            std::cout << "Error: Intern cannot create form '" << name << "' (Unknown type)" << std::endl;
+            return NULL;
+    }
 }
