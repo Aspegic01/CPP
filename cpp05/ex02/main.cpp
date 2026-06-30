@@ -14,6 +14,7 @@ int main()
     std::cout << "TEST 1: ShrubberyCreationForm" << std::endl;
     std::cout << "========================================" << std::endl;
     try {
+
         ShrubberyCreationForm shrubForm("home");
         Bureaucrat bob("Bob", 137);
 
@@ -107,6 +108,18 @@ int main()
 
         highGrade.executeForm(pardonForm);
     } catch (std::exception &e) {
+        std::cerr << e.what() << std::endl;
+    }
+    
+    try {
+        ShrubberyCreationForm sh("Park");
+        Bureaucrat b("Bob", 1);
+        b.executeForm(sh);
+        b.signForm(sh);
+        b.executeForm(sh);
+
+    }
+    catch (std::exception &e) {
         std::cerr << e.what() << std::endl;
     }
 

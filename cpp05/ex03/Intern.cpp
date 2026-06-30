@@ -5,7 +5,7 @@ Intern::Intern(const Intern &other) { (void)other; }
 Intern::~Intern() {}
 Intern &Intern::operator=(const Intern &other) { (void)other; return *this; }
 
-AForm* Intern::makeForm(std::string name, std::string target) {
+AForm* Intern::makeForm(const std::string &name, const std::string &target) {
     std::string formNames[] = {
         "shrubbery creation",
         "robotomy request",
@@ -14,12 +14,10 @@ AForm* Intern::makeForm(std::string name, std::string target) {
 
     int i = 0;
     
-    // Increment 'i' until we find a match or reach the end of the array
     while (i < 3 && formNames[i] != name) {
         i++;
     }
 
-    // Switch on the resulting integer index
     switch (i) {
         case 0:
             std::cout << "Intern creates " << name << std::endl;

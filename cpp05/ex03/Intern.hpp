@@ -13,7 +13,7 @@ public:
     ~Intern();
     Intern &operator=(const Intern &other);
 
-    AForm* makeForm(std::string name, std::string target);
+    AForm* makeForm(const std::string &name, const std::string &target);
 };
 
 #endif

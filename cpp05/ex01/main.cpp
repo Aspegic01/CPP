@@ -58,6 +58,7 @@ int main()
             std::cout << intern << std::endl;
             std::cout << secret << std::endl;
             secret.beSigned(intern);
+            std::cout << "After sign: " << secret << std::endl;
         }
         catch (const std::exception &e)
         {
