@@ -10,8 +10,7 @@ private:
 
 	bool isValidDate(const std::string& date) const;
 	bool isValidValue(const std::string& value) const;
-	bool isValidLine(const std::string& line) const;
-	bool isValidInputLine(const std::string& line) const;
+	bool isValidLine(const std::string &line, const std::string &delimiter) const;
 
 public:
 	BitcoinExchange();

@@ -57,22 +57,13 @@ bool BitcoinExchange::isValidValue(const std::string &value) const
     return (*end == '\0');
 }
 
-bool BitcoinExchange::isValidLine(const std::string &line) const
+bool BitcoinExchange::isValidLine(const std::string &line, const std::string &delimiter) const
 {
-    size_t pos = line.find(',');
-    if (pos == std::string::npos)
-        return false;
-    return isValidDate(line.substr(0,pos)) &&
-           isValidValue(line.substr(pos+1));
-}
+    size_t pos = line.find(delimiter);
 
-bool BitcoinExchange::isValidInputLine(const std::string &line) const
-{
-    size_t pos = line.find(" | ");
     if (pos == std::string::npos)
         return false;
-    return isValidDate(line.substr(0,pos)) &&
-           isValidValue(line.substr(pos+3));
+    return isValidDate(line.substr(0, pos)) && isValidValue(line.substr(pos + delimiter.length()));
 }
 
 void BitcoinExchange::loadDatabase(const std::string &filename)
@@ -87,7 +78,7 @@ void BitcoinExchange::loadDatabase(const std::string &filename)
 
     while (std::getline(file,line))
     {
-        if (!isValidLine(line))
+        if (!isValidLine(line, ","))
             continue;
 
         size_t pos = line.find(',');
@@ -107,7 +98,7 @@ void BitcoinExchange::processInput(const std::string &filename) const
 
     while (std::getline(file,line))
     {
-        if (!isValidInputLine(line))
+        if (!isValidLine(line, " | "))
         {
             std::cerr << "Error: bad input => " << line << std::endl;
             continue;
@@ -142,10 +133,6 @@ void BitcoinExchange::processInput(const std::string &filename) const
             --it;
         }
 
-        std::cout << date << " => "
-                  << value
-                  << " = "
-                  << value * it->second
-                  << std::endl;
+        std::cout << date << " => " << value << " = " << value * it->second << std::endl;
     }
 }

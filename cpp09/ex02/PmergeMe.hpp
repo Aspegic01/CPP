@@ -1,26 +1,30 @@
 #ifndef PMERGEME_HPP
-# define PMERGEME_HPP
+#define PMERGEME_HPP
 
-# include <vector>
-# include <deque>
-# include <string>
+#include <vector>
+#include <deque>
+#include <iostream>
+#include <string>
+#include <stdexcept>
 
 class PmergeMe {
 private:
-    std::vector<int>    _vec;
-    std::deque<int>     _deq;
-
-    std::vector<size_t> _jacobsthalOrder(size_t n);
-    void                _sortVector(std::vector<int>& arr);
-    void                _sortDeque(std::deque<int>& arr);
+    std::vector<int> _vec;
+    std::deque<int>  _deq;
 
 public:
+    // Orthodox Canonical Form
     PmergeMe();
     PmergeMe(const PmergeMe& other);
     PmergeMe& operator=(const PmergeMe& other);
     ~PmergeMe();
 
-    void sortAndBenchmark(int argc, char **argv);
+    // Sorting functions for specific containers
+    void sortVec(std::vector<int>& arr);
+    void sortDeq(std::deque<int>& arr);
+
+    // Parse arguments and run the complete benchmark
+    void parseAndSort(int ac, char** av);
 };
 
-#endif
+#endif // PMERGEME_HPP

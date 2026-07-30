@@ -10,49 +10,67 @@ RPN& RPN::operator=(const RPN& other) {
     return *this;
 }
 RPN::~RPN() {}
-bool RPN::isOperator(const char c) const {
-    return (c == '+' || c == '-' || c == '*' || c == '/');
+
+bool RPN::isOperator(const std::string &token) const
+{
+    return token == "+" ||
+           token == "-" ||
+           token == "*" ||
+           token == "/";
 }
-void RPN::performOperation(const char c) {
-    if (_stack.size() < 2)
+
+void RPN::pushNumber(const std::string &token)
+{
+    char *end;
+    long number = std::strtol(token.c_str(), &end, 10);
+
+    if (*end != '\0')
+        throw std::runtime_error("Error: invalid token.");
+
+    _stack.push(static_cast<int>(number));
+}
+
+void RPN::performOperation(char op)
+{
+    if (_stack.size() < 2) 
         throw std::runtime_error("Error: not enough operands.");
+
     int b = _stack.top();
     _stack.pop();
+
     int a = _stack.top();
     _stack.pop();
-    switch (c) {
-        case '+':
-            _stack.push(a + b);
-            break;
-        case '-':
-            _stack.push(a - b);
-            break;
-        case '*':
-            _stack.push(a * b);
-            break;
-        case '/':
-            if (b == 0)
-                throw std::runtime_error("Error: division by zero.");
-            _stack.push(a / b);
-            break;
+
+    if (op == '+')
+        _stack.push(a + b);
+    else if (op == '-')
+        _stack.push(a - b);
+    else if (op == '*')
+        _stack.push(a * b);
+    else if (op == '/')
+    {
+        if (b == 0)
+            throw std::runtime_error("Error: division by zero.");
+
+        _stack.push(a / b);
     }
 }
 
-void RPN::calculate(const std::string &input) {
+void RPN::calculate(const std::string &input)
+{
     std::istringstream iss(input);
     std::string token;
-    while (iss >> token) {
-        if (token.length() == 1 && isOperator(token[0])) {
+
+    while (iss >> token)
+    {
+        if (isOperator(token))
             performOperation(token[0]);
-        } else {
-            char *end;
-            long num = strtol(token.c_str(), &end, 10);
-            if (*end != '\0')
-                throw std::runtime_error("Error: invalid token.");
-            _stack.push(static_cast<int>(num));
-        }
+        else
+            pushNumber(token);
     }
+
     if (_stack.size() != 1)
         throw std::runtime_error("Error: invalid expression.");
+
     std::cout << _stack.top() << std::endl;
 }
